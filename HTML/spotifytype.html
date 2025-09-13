@@ -1,0 +1,716 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soundverse - Track, Review, Discover Music</title>
+    <style>
+        /* CSS Reset and Variables */
+        :root {
+            --primary: #1DB954;
+            --secondary: #191414;
+            --accent: #1ED760;
+            --light: #F8F9FA;
+            --dark: #121212;
+            --gray: #282828;
+            --text-light: #FFFFFF;
+            --text-dark: #B3B3B3;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: var(--secondary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+            margin: 0 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--gray);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .search-input:focus {
+            outline: 2px solid var(--primary);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-dark);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--text-light);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--dark) 100%);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--gray);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .card-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-subtitle {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .star {
+            margin-right: 0.25rem;
+        }
+
+        /* Reviews Section */
+        .reviews-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .review-card {
+            background-color: var(--gray);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+
+        .review-user {
+            font-weight: 600;
+        }
+
+        .review-date {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .review-album {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .review-album-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            margin-right: 1rem;
+        }
+
+        .review-album-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .review-album-title {
+            font-weight: 600;
+        }
+
+        .review-album-artist {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .review-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .review-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .review-action {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--text-dark);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .review-action:hover {
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .search-container {
+                order: 3;
+                max-width: 100%;
+                margin: 1rem 0 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with navigation -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <span class="logo-text">Soundverse</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Discover</a>
+                <a href="#" class="nav-link">Lists</a>
+                <a href="#" class="nav-link">Community</a>
+            </div>
+            
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Search albums, artists, or users...">
+            </div>
+            
+            <div class="user-actions">
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Sign Up</button>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="container">
+        <!-- Hero section -->
+        <section class="hero">
+            <h1>Track, Review, and Discover Music</h1>
+            <p>Join our community of music enthusiasts to log your listening history, write reviews, and discover new albums.</p>
+            <button class="btn btn-primary">Get Started</button>
+        </section>
+
+        <!-- Featured albums section -->
+        <h2 class="section-title">Featured Albums</h2>
+        <div class="cards-grid">
+            <!-- Album 1 -->
+            <div class="card">
+                <img src="https://placehold.co/400x400" alt="Album cover with abstract geometric design in vibrant neon colors against dark background" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Midnight Visions</h3>
+                    <p class="card-subtitle">Luna Eclipse</p>
+                    <div class="card-rating">
+                        <span class="star">★</span>
+                        <span>4.2</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Album 2 -->
+            <div class="card">
+                <img src="https://placehold.co/400x400" alt="Album artwork featuring vintage microphone with warm lighting and subtle grain effect" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Golden Hour</h3>
+                    <p class="card-subtitle">Solstice</p>
+                    <div class="card-rating">
+                        <span class="star">★</span>
+                        <span>4.5</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Album 3 -->
+            <div class="card">
+                <img src="https://placehold.co/400x400" alt="Minimalist cover with bold typography and gradient color background" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Echo Chamber</h3>
+                    <p class="card-subtitle">The Reflections</p>
+                    <div class="card-rating">
+                        <span class="star">★</span>
+                        <span>3.9</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Album 4 -->
+            <div class="card">
+                <img src="https://placehold.co/400x400" alt="Double exposure artwork blending cityscape with natural elements" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Urban Nature</h3>
+                    <p class="card-subtitle">Modern Nomads</p>
+                    <div class="card-rating">
+                        <span class="star">★</span>
+                        <span>4.7</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Album 5 -->
+            <div class="card">
+                <img src="https://placehold.co/400x400" alt="Silhouette of a dancer against a colorful sunset sky" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Dance of Shadows</h3>
+                    <p class="card-subtitle">Rhythm Collective</p>
+                    <div class="card-rating">
+                        <span class="star">★</span>
+                        <span>4.0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Album 6 -->
+            <div class="card">
+                <img src="https://placehold.co/400x400" alt="Vintage record player with smoke effects and nostalgic color grading" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Vinyl Dreams</h3>
+                    <p class="card-subtitle">Analog Souls</p>
+                    <div class="card-rating">
+                        <span class="star">★</span>
+                        <span>4.3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent reviews section -->
+        <h2 class="section-title">Recent Reviews</h2>
+        <div class="reviews-container">
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://placehold.co/40x40" alt="User profile picture with artistic filter and soft lighting" class="user-avatar">
+                    <span class="review-user">MusicExplorer</span>
+                    <span class="review-date">2 hours ago</span>
+                </div>
+                <div class="review-album">
+                    <img src="https://placehold.co/60x60" alt="Album cover with geometric patterns and bold colors" class="review-album-img">
+                    <div class="review-album-info">
+                        <span class="review-album-title">Synthetic Dreams</span>
+                        <span class="review-album-artist">Neon Wave</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>This album completely blew me away! The production is incredibly crisp, and the synth work creates such an immersive atmosphere. Standout tracks for me are "Digital Sunrise" and "Circuit Breaker". Highly recommend for fans of electronic music with depth.</p>
+                </div>
+                <div class="review-actions">
+                    <button class="review-action">
+                        <span>👍</span>
+                        <span>12</span>
+                    </button>
+                    <button class="review-action">
+                        <span>💬</span>
+                        <span>3</span>
+                    </button>
+                    <button class="review-action">
+                        <span>⭐</span>
+                        <span>Save</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://placehold.co/40x40" alt="User profile picture with concert background and stage lighting" class="user-avatar">
+                    <span class="review-user">JazzEnthusiast</span>
+                    <span class="review-date">5 hours ago</span>
+                </div>
+                <div class="review-album">
+                    <img src="https://placehold.co/60x60" alt="Black and white portrait of jazz musician with moody lighting" class="review-album-img">
+                    <div class="review-album-info">
+                        <span class="review-album-title">Midnight Sessions</span>
+                        <span class="review-album-artist">The Quartet</span>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <p>An exquisite return to form for The Quartet. The improvisation sections are breathtaking, and the chemistry between band members is palpable. This might be their most cohesive work yet. Perfect for late-night listening with a glass of whiskey.</p>
+                </div>
+                <div class="review-actions">
+                    <button class="review-action">
+                        <span>👍</span>
+                        <span>24</span>
+                    </button>
+                    <button class="review-action">
+                        <span>💬</span>
+                        <span>7</span>
+                    </button>
+                    <button class="review-action">
+                        <span>⭐</span>
+                        <span>Save</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Soundverse</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">About Us</a></li>
+                    <li class="footer-link"><a href="#">Features</a></li>
+                    <li class="footer-link"><a href="#">Pricing</a></li>
+                    <li class="footer-link"><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Community</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">Forums</a></li>
+                    <li class="footer-link"><a href="#">Guidelines</a></li>
+                    <li class="footer-link"><a href="#">Events</a></li>
+                    <li class="footer-link"><a href="#">Merchandise</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#">Help Center</a></li>
+                    <li class="footer-link"><a href="#">Contact Us</a></li>
+                    <li class="footer-link"><a href="#">Privacy Policy</a></li>
+                    <li class="footer-link"><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 Soundverse. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Simple rating system for demo purposes
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                alert('Album detail view would open here');
+            });
+        });
+
+        // Like button functionality
+        document.querySelectorAll('.review-action').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const countElement = this.querySelector('span:last-child');
+                if (this.textContent.includes('👍')) {
+                    let count = parseInt(countElement.textContent);
+                    countElement.textContent = count + 1;
+                    this.style.color = '#1DB954';
+                }
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                alert(`Searching for: ${this.value}`);
+                this.value = '';
+            }
+        });
+        // Replace with your token from Spotify Developer Console
+            const token = "YOUR_SPOTIFY_ACCESS_TOKEN";
+
+            async function searchAlbums(query) {
+                const res = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=album&limit=6`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+                });
+                const data = await res.json();
+                return data.albums.items; // array of albums
+            }
+
+            async function showAlbums(query) {
+                const albums = await searchAlbums(query);
+                const grid = document.querySelector(".cards-grid");
+                grid.innerHTML = albums.map(album => `
+                <div class="card">
+                    <img src="${album.images[0]?.url}" alt="${album.name}" class="card-img">
+                    <div class="card-content">
+                    <h3 class="card-title">${album.name}</h3>
+                    <p class="card-subtitle">${album.artists.map(a => a.name).join(", ")}</p>
+                    <div class="card-rating">Spotify Popularity: ${album.popularity || "N/A"}</div>
+                    </div>
+                </div>
+                `).join("");
+            }
+
+            // Example: load some albums at start
+            showAlbums("Taylor Swift");
+
+            // Hook search bar
+            document.querySelector(".search-input").addEventListener("keyup", function(e) {
+                if (e.key === "Enter") {
+                showAlbums(this.value);
+                }
+            });
+    </script>
+
+</body></html>

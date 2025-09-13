@@ -1,0 +1,43 @@
+html{
+    background-color:rgb(255, 242, 208) ;
+}
+h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(29, 20, 8);
+    text-align: center;
+}
+h4{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: coral;
+    text-align: center;
+    padding: 5px;
+    border-width: 7px;
+    border-style: groove;
+    border-color: rgb(0, 153, 255);
+}
+.STUDENT-INFO{
+    margin-inline: 20px;
+}
+.ADDRESS{
+    margin-inline: 20px;
+}
+.contact{
+    margin-inline: 20px;
+}
+.Courses{
+    margin-inline: 20px;
+}
+input[type="text" i] {
+    margin-bottom:10px;
+    border-style:dotted;
+    border-color:brown;
+}
+textarea{
+    inline-size:500px;
+}
+input[type="submit" i]{
+    inline-size: 100px;
+    margin-block-start: 20px;
+}
+
+
