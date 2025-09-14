@@ -1,88 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>studentspage</title>
-    <link href="/HTML/CSS/style.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    form {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007acc;
+    }
+
+    h4 {
+      margin: 15px 0 10px;
+      color: #007acc;
+    }
+
+    h5 {
+      margin: 10px 0 5px;
+      font-weight: normal;
+      color: #555;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #007acc;
+      box-shadow: 0 0 5px rgba(0,122,204,0.3);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    label {
+      display: block;
+      margin-top: 5px;
+    }
+
+    input[type="radio"] {
+      width: auto;
+      margin-right: 5px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background: #007acc;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 15px;
+    }
+
+    input[type="submit"]:hover {
+      background: #005f99;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 20px 0;
+    }
+
+    /* Small devices */
+    @media (max-width: 600px) {
+      form {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <form action="students.php">
-        <h1>STUDENTS FORM</h1>
-        <hr>
-        <div class="STUDENT-INFO">
-            <h4>STUDENT INFORMATION</h4>
-                <input type="text" placeholder="First name">
-                <input type="text" placeholder="middle name">
-                <input type="text" placeholder="last name">
-                <br><br>
-                <label for="date of Birth">Date of Birth:
-                <input type="date" placeholder="birthday">
-                </label>
-                <br><br>
-                <input type="text" placeholder="Student Id">
-        </div>
-        <hr>
-        <div class="ADDRESS">
-            <h4>ADDRESS</h4>
-                <input type="text" placeholder="Street Adress">
-                <h5>Country</h5>
-                <label for="Country">
-                <select name="country" id="country">
-                    <option value="Australia">Australia</option>
-                    <option value="Russia">Russia</option>
-                    <option value="India">India</option>
-                    <option value="Pakistan">Pakistan</option>
-                    <option value="America">America</option>
-                    <option value="Canada">Canada</option>
-                </label>
-                </select>
-                <h5>state</h5>
-                <label for="state">
-                <select name="state" id="state">
-                    <option value="Odisha">Odisha</option>
-                    <option value="WB">WB</option>
-                    <option value="Andhra">India</option>
-                    <option value="Tamil Nadu">Tamil Nadu</option>
-                    <option value="Punjab">Punjab</option>
-                    <option value="Himachal">Himachal</option>
-                </label>
-                </select>
-                <input type="text" placeholder="zip">
-        </div>
-        <hr>
-        <div class="contact">
-            <h4>CONTACT INFORMATION</h4>
-                <input type="text" placeholder="E-mail">
-                <input type="text" placeholder="phone number">
-        </div>
-        <hr>
-        <div class="Courses">
-            <h4>COURSES</h4>
-            <h5>Branch</h5>
-            <label for="branch">
-                <select name="branch" id="branch">
-                    <option value="Bsc cs">Bsc cs</option>
-                    <option value="bca">bca</option>
-                    <option value="Btech cs">Btech cs</option>
-                    <option value="Btech IT">Btech it</option>
-            </label>
-            </select> 
-            <h5>subjects</h5>
-            <label for="101">
-                <input type="radio" value="math" name="subjects" id="101">Math
-            </label>
-            <label for="102">
-                <input type="radio" value="oops" name="subjects" id="102">OOPS
-            </label>                                  
-            <label for="103">
-                <input type="radio" value="Java" name="subjects" id="103">Java
-            </label></select>           
-        </div>
-        <hr>
-        <textarea name="feedback" id="101" placeholder="please give your feedback" rows="5"></textarea>
-        <br>
-     <input type="submit" value="submit">
-    </form>
+  <form action="students.php" id="studentForm">
+    <h1>STUDENTS FORM</h1>
+    <hr>
+
+    <div class="STUDENT-INFO">
+      <h4>STUDENT INFORMATION</h4>
+      <input type="text" placeholder="First name" required>
+      <input type="text" placeholder="Middle name">
+      <input type="text" placeholder="Last name" required>
+
+      <label>Date of Birth:
+        <input type="date" required>
+      </label>
+
+      <input type="text" placeholder="Student Id" required>
+    </div>
+
+    <hr>
+    <div class="ADDRESS">
+      <h4>ADDRESS</h4>
+      <input type="text" placeholder="Street Address">
+      <h5>Country</h5>
+      <select name="country" id="country">
+        <option value="">--Select--</option>
+        <option value="Australia">Australia</option>
+        <option value="Russia">Russia</option>
+        <option value="India">India</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="America">America</option>
+        <option value="Canada">Canada</option>
+      </select>
+
+      <h5>State</h5>
+      <select name="state" id="state">
+        <option value="">--Select--</option>
+        <option value="Odisha">Odisha</option>
+        <option value="WB">West Bengal</option>
+        <option value="Andhra">Andhra Pradesh</option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Punjab">Punjab</option>
+        <option value="Himachal">Himachal</option>
+      </select>
+
+      <input type="text" placeholder="ZIP">
+    </div>
+
+    <hr>
+    <div class="contact">
+      <h4>CONTACT INFORMATION</h4>
+      <input type="email" placeholder="E-mail" required>
+      <input type="tel" placeholder="Phone number" required>
+    </div>
+
+    <hr>
+    <div class="Courses">
+      <h4>COURSES</h4>
+      <h5>Branch</h5>
+      <select name="branch" id="branch">
+        <option value="">--Select--</option>
+        <option value="Bsc cs">BSc CS</option>
+        <option value="BCA">BCA</option>
+        <option value="Btech cs">BTech CS</option>
+        <option value="Btech IT">BTech IT</option>
+      </select>
+
+      <h5>Subjects</h5>
+      <label><input type="radio" value="Math" name="subjects"> Math</label>
+      <label><input type="radio" value="OOPS" name="subjects"> OOPS</label>
+      <label><input type="radio" value="Java" name="subjects"> Java</label>
+    </div>
+
+    <hr>
+    <textarea name="feedback" placeholder="Please give your feedback" rows="5"></textarea>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    // JS: Confirmation before submit
+    document.getElementById("studentForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // stop real submission for demo
+      alert("Form submitted successfully ✅");
+      this.reset();
+    });
+  </script>
 </body>
 </html>
