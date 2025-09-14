@@ -1,40 +1,38 @@
+//a Simple Calculator using switch case
 #include <stdio.h>
-int main(){
-    double num1, num2;
+#include <float.h>
+
+int main() {
     char op;
-    char choice;
+    double a, b, res;
 
-    do{
-        printf("SIMPLE CALCULATOR\n");
-        printf("Enter first number: ");
-        scanf("%1f", &num1);
+    // Read the operator
+    printf("Enter an operator (+, -, *, /): ");
+    scanf("%c", &op);
 
-        printf("Enter operator(+, -, *, /): ")
-        scanf("%1f", &num2);
-
-        switch (op)
-        {
-        case '+':
-            printf("Result: %.2lf\n", num1 + num2);
-            break;
-        case '-':
-            printf("Result: %.2lf\n", num1 - num2);
-            break;
-        case '*':
-            printf("Result: %.2lf\n", num1 * num2);
-            break;
-        case '/':
-            if(num2 != 0)    
-                printf("Result: %.2lf\n", num1 - num2);
-            else
-                printf("Error! cant divide by zero\n");
-            break;
-        default:
-                printf("\n Press Y for another calculation: ");
-                scanf("%c", &choice);       
-        }
-        while(choice =='y' || choice =='Y');
-        printf("Exiting Calculator.\n");
-        return 0;
+    // Read the two numbers
+    printf("Enter two operands: ");
+    scanf("%lf %lf", &a, &b);
+    // switch-case
+    switch (op) {
+    case '+':
+        res = a + b;
+        break;
+    case '-':
+        res = a - b;
+        break;
+    case '*':
+         res = a * b;
+        break;
+    case '/':
+        res = a / b;
+        break;
+    default:
+        printf("Error! Incorrect Operator Value\n");
+        res = -DBL_MAX;
     }
+    if(res!=-DBL_MAX)
+      printf("%.2lf", res);
+    
+    return 0;
 }
